@@ -28,13 +28,5 @@ router.get("/", async (req, res, next) => {
     next(creatErr(401, error));
   }
 });
-router.delete("/:id", async (req,res, next)=>{
-    try {
-        const deleteOne = await Product.deleteOne({_id: req.params.id})
-        res.send(deleteOne)
-    } catch (error) {
-    next(creatErr(401, error));
-        
-    }
-})
+
 export default router;

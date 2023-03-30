@@ -20,9 +20,6 @@ const NavBar = () => {
     dispatch,
     error,
     setError,
-    
-    
-    
   } = useContext(UserDate);
   const hoverData = "Click to update picture ";
   const {
@@ -40,13 +37,30 @@ const NavBar = () => {
   }
   function handleLogOut() {
     localStorage.removeItem("user");
-    fetch("http://localhost:5000/api/user/login/logout", {withCredntials: true,
-    credentials: 'include'})
-    .then(response=>response.json())
-    .then(result=>setError(result.message))
-    .catch(err=>setError(err))
+    fetch("/api/user/login/logout")
+      .then((response) => response.json())
+      .then((result) => setError(result.message))
+      .catch((err) => setError(err));
 
-    
+    setUser(null);
+  }
+  function handleDeleteAcount() {
+    localStorage.removeItem("user");
+    fetch(`/api/delete/deleteacount/${user._id}`, {
+      method: "DELETE",
+      withCredntials: true,
+      credentials: "include",
+      headers: {
+        "Content-type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        console.log(result);
+        navigate("register");
+      })
+      .catch((err) => setError(err));
+
     setUser(null);
   }
   function handleUpdate(e) {
@@ -72,17 +86,16 @@ const NavBar = () => {
                   onClick={(e) => setClick(true)}
                   width={"100px"}
                   height={"100px"}
-                  src={`http://localhost:5000/api/user/login/${user._id}`}
+                  src={`/api/user/login/${user._id}`}
                   alt=""
                 />
               ) : null}
             </div>
-            <div 
-                  onClick={(e) => {
-                    setError(null)
-                    setClick(true)
-                  }}
-            
+            <div
+              onClick={(e) => {
+                setError(null);
+                setClick(true);
+              }}
             >
               <h6>Cashier Name</h6>
               <span> {cashierName} </span>
@@ -99,7 +112,14 @@ const NavBar = () => {
                   />
                 </FormGroup>
                 <Button onClick={(e) => setClick(false)}>Cancel</Button>
-                <Button color="primary" tag="input" type="submit" value="Register" >Submit</Button>
+                <Button
+                  color="primary"
+                  tag="input"
+                  type="submit"
+                  value="Register"
+                >
+                  Submit
+                </Button>
                 {error && <Label className="error">{error} </Label>}
               </Form>
             )}
@@ -175,7 +195,7 @@ const NavBar = () => {
                   >
                     Add new Products
                   </Button>
-                 
+
                   <Button
                     variant="danger"
                     onClick={() => {
@@ -187,6 +207,9 @@ const NavBar = () => {
                   </Button>
                   <Button variant="secondary" onClick={handleLogOut}>
                     Log Out
+                  </Button>
+                  <Button variant="secondary" onClick={handleDeleteAcount}>
+                    Delete Acount
                   </Button>
                 </div>
               </Nav>

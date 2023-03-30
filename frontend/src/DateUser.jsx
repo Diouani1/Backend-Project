@@ -29,7 +29,7 @@ const DateUser = ({ children }) => {
       formUser.append("password", password.current.value);
       formUser.append("fotoProfile", fotoProfile.current.files[0]);
       try {
-        const addUser = await fetch("http://localhost:5000/api/user/register", {
+        const addUser = await fetch("/api/user/register", {
           method: "POST",
           body: formUser,
         });
@@ -42,6 +42,8 @@ const DateUser = ({ children }) => {
           }
           throw new Error(userData.errors[0].msg);
         }
+    navigate("login");
+
       } catch (error) {
         setError(error.message);
       }
@@ -52,11 +54,9 @@ const DateUser = ({ children }) => {
           email: email.current.value,
           password: password.current.value,
         };
-        const loginUser = await fetch("http://localhost:5000/api/user/login/login", {
+        const loginUser = await fetch("/api/user/login/login", {
           method: "POST",
           body: JSON.stringify(data),
-          withCredntials: true,
-          credentials: "include",
           headers: {
             "Content-type": "application/json",
           },
@@ -78,7 +78,7 @@ const DateUser = ({ children }) => {
         formImgUser.append("fotoProfile", fotoProfile.current.files[0]);
         formImgUser.append("id", id);
         const updateImgUser = await fetch(
-          "http://localhost:5000/api/user/register",
+          "/api/user/register",
           {
             method: "PUT",
             body: formImgUser,

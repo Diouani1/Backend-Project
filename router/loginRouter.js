@@ -25,9 +25,12 @@ router.post("/login", validLoginInfo, async (req, res, next) => {
     next(creatErr(404, error));
   }
 });
-router.get("/logout" , (req,res,next)=>{
-  res.clearCookie("token").send({message:"you are logout and cookies are deleted"})
-} )
+router.get("/logout", (req, res, next) => {
+  console.log("first");
+  res
+    .clearCookie("token")
+    .send({ message: "you are logout and cookies are deleted" });
+});
 router.get("/:id", async (req, res, next) => {
   try {
     const fotoProfile = await User.findById(req.params.id);
@@ -38,4 +41,5 @@ router.get("/:id", async (req, res, next) => {
     next(creatErr(404, error));
   }
 });
+
 export default router;

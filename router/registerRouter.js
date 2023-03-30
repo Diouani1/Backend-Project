@@ -4,9 +4,8 @@ import creatErr from "http-errors";
 import multer from "multer";
 import sendingEmail from "../middleWare/sendingEmail.js";
 import EmailConfirmation from "../models/EmailConfirmation.js";
-import path from "path"
 import validRegisterInfo from "../middleWare/validRegister.js";
-import fs from "fs"
+import fs from "fs";
 const router = express.Router();
 
 const upload = multer({ dest: "uploads/" });
@@ -17,7 +16,8 @@ const fotoProfileMiddleWare = upload.fields([
 
 router.post(
   "/",
-  fotoProfileMiddleWare, validRegisterInfo,
+  fotoProfileMiddleWare,
+  validRegisterInfo,
   async (req, res, next) => {
     const fotoProfile = req.files["fotoProfile"];
     let newUser;
@@ -55,29 +55,29 @@ router.get("/", async (req, res, next) => {
         userId: req.query.userId,
         key: req.query.key,
       });
-      // const navToLogin = path.resolve("./", "fronend/src/components/User/LogIn/LogIn.jsx")
-      res.redirect("http://localhost:3000/react-project#/login");
+      res.redirect("http://localhost:5000");
     }
   } catch (error) {
     next(creatErr(401, error));
   }
 });
 
-router.put("/", fotoProfileMiddleWare, async(req,res,next)=>{
-
-if(!req.files["fotoProfile"]){
-  next(creatErr(401,"please select the file"))
-  return
-}
+router.put("/", fotoProfileMiddleWare, async (req, res, next) => {
+  if (!req.files["fotoProfile"]) {
+    next(creatErr(401, "please select the file"));
+    return;
+  }
   try {
-    
-  const updateImg = await User.findOneAndUpdate({_id: req.body.id}, {imgProfile:req.files["fotoProfile"][0] }, {new: true})
-  
-  res.send(updateImg)
-} catch (error) {
-  next(creatErr(401, error));
-}
-  
-  })
+    const updateImg = await User.findOneAndUpdate(
+      { _id: req.body.id },
+      { imgProfile: req.files["fotoProfile"][0] },
+      { new: true }
+    );
+
+    res.send(updateImg);
+  } catch (error) {
+    next(creatErr(401, error));
+  }
+});
 
 export default router;
