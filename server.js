@@ -13,8 +13,8 @@ import path from "path";
 
 dotenv.config();
 
-const app = express();
 connect();
+const app = express();
 app.use(express.static(path.resolve("./", "frontend/build")));
 
 app.use(cookiesParser());
@@ -44,7 +44,7 @@ app.use((err, req, res, next) => {
     .send(err || { message: "Something went Wrong!" });
 });
 
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`The server 🇩🇿 🌴 🇪🇭 is listening on  http://localhost:${port}`);
 });
