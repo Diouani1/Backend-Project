@@ -29,7 +29,7 @@ const DateUser = ({ children }) => {
       formUser.append("password", password.current.value);
       formUser.append("fotoProfile", fotoProfile.current.files[0]);
       try {
-        const addUser = await fetch("/api/user/register", {
+        const addUser = await fetch("https://full-stack-0797.onrender.com/api/user/register", {
           method: "POST",
           body: formUser,
         });
@@ -54,7 +54,7 @@ const DateUser = ({ children }) => {
           email: email.current.value,
           password: password.current.value,
         };
-        const loginUser = await fetch("/api/user/login/login", {
+        const loginUser = await fetch("https://full-stack-0797.onrender.com/api/user/login/login", {
           method: "POST",
           body: JSON.stringify(data),
           headers: {
