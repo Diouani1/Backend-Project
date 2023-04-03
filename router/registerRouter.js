@@ -34,7 +34,7 @@ router.post(
       res.send(newUser);
       next();
     } catch (error) {
-      next(creatErr(401, error));
+      next(creatErr(477, error));
     }
   },
   sendingEmail
