@@ -34,6 +34,7 @@ const DateUser = ({ children }) => {
           body: formUser,
         });
         const userData = await addUser.json();
+        console.log("first", userData);
         if (!userData._id) {
           if (!userData.message) {
             const key = Object.entries(userData.keyValue)[0][0];
@@ -42,9 +43,9 @@ const DateUser = ({ children }) => {
           }
           throw new Error(userData.errors[0].msg);
         }
-    navigate("login");
-
+        navigate("login");
       } catch (error) {
+        console.log("second", error);
         setError(error.message);
       }
     } else if (action.type === "login") {
@@ -64,7 +65,7 @@ const DateUser = ({ children }) => {
         const loginData = await loginUser.json();
         if (!loginData._id) throw new Error(loginData.message);
         localStorage.setItem("user", JSON.stringify(loginData));
-        navigate("/")
+        navigate("/");
         setUser(loginData);
       } catch (error) {
         console.log(error);
@@ -77,20 +78,16 @@ const DateUser = ({ children }) => {
         const formImgUser = new FormData();
         formImgUser.append("fotoProfile", fotoProfile.current.files[0]);
         formImgUser.append("id", id);
-        const updateImgUser = await fetch(
-          "/api/user/register",
-          {
-            method: "PUT",
-            body: formImgUser,
-          }
-        );
+        const updateImgUser = await fetch("/api/user/register", {
+          method: "PUT",
+          body: formImgUser,
+        });
         const userData = await updateImgUser.json();
 
         if (userData.message) throw new Error(userData.message);
         localStorage.setItem("user", JSON.stringify(userData));
-       window.location.reload()
+        window.location.reload();
         setClick(false);
-        
       } catch (error) {
         setError(error.message);
       }
@@ -123,7 +120,6 @@ const DateUser = ({ children }) => {
         setHover,
         click,
         setClick,
-      
       }}
     >
       {children}
