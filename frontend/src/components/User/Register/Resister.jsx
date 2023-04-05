@@ -3,11 +3,25 @@ import { Label, Form, FormGroup, Input, Button } from "reactstrap";
 import { UserDate } from "../../../DateUser";
 import { useContext } from "react";
 const Register = () => {
-  const {firstName, lastName, userName, email, password, dispatch, error,fotoProfile  } =
-    useContext(UserDate);
+  const {
+    firstName,
+    lastName,
+    userName,
+    email,
+    password,
+    repeatPassword,
+    dispatch,
+    error,
+    setError,
+    fotoProfile,
+  } = useContext(UserDate);
 
   async function handelSubmit(e) {
     e.preventDefault();
+    if (password !== repeatPassword) {
+      setError("The password should be the same");
+      return;
+    }
     dispatch({ type: "register" });
   }
 
@@ -70,6 +84,17 @@ const Register = () => {
           />
         </FormGroup>
         <FormGroup>
+          <Label for="examplePassword">Repeat Password</Label>
+          <Input
+            innerRef={repeatPassword}
+            id="examplePassword"
+            name="password"
+            placeholder="repeat password placeholder"
+            type="password"
+            required
+          />
+        </FormGroup>
+        <FormGroup>
           <Label for="examplePassword">upload your Foto (Option)</Label>
           <Input
             innerRef={fotoProfile}
@@ -77,7 +102,6 @@ const Register = () => {
             name="file"
             placeholder="upload foto"
             type="file"
-            
           />
         </FormGroup>
         <Button color="primary" tag="input" type="submit" value="Register" />

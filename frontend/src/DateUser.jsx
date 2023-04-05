@@ -11,6 +11,7 @@ const DateUser = ({ children }) => {
   const userName = useRef();
   const email = useRef();
   const password = useRef();
+  const repeatPassword = useRef();
   const fotoProfile = useRef();
 
   const navigate = useNavigate();
@@ -108,6 +109,7 @@ const DateUser = ({ children }) => {
         userName,
         email,
         password,
+        repeatPassword,
         fotoProfile,
         state,
         dispatch,
