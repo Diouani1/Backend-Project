@@ -24,7 +24,7 @@ const sendingEmail = async (req, res, next) => {
     <p>
 
         This email '${req.body.email}', is used to register in our app, <br>
-        please visit <a href="https://full-stack-0797.onrender.com/api/user/register?userId=${user._id}&key=${key}">this link</a> To verify your email.
+        please visit <a href="https://cashier-project.onrender.com/api/user/register?userId=${user._id}&key=${key}">this link</a> To verify your email.
         <br>
         If you not the owner, please ignore the message
         <br>
