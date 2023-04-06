@@ -18,7 +18,7 @@ const Register = () => {
 
   async function handelSubmit(e) {
     e.preventDefault();
-    if (password !== repeatPassword) {
+    if (password.current.value !== repeatPassword.current.value) {
       setError("The password should be the same");
       return;
     }

@@ -46,7 +46,6 @@ const DateUser = ({ children }) => {
         }
         navigate("login");
       } catch (error) {
-        console.log("second", error);
         setError(error.message);
       }
     } else if (action.type === "login") {
