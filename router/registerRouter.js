@@ -55,7 +55,7 @@ router.get("/", async (req, res, next) => {
         userId: req.query.userId,
         key: req.query.key,
       });
-      res.redirect("https://full-stack-0797.onrender.com/#/login");
+      res.redirect("https://cashier-project.onrender.com/#/login");
     }
   } catch (error) {
     next(creatErr(401, error));
