@@ -19,6 +19,8 @@ const DateUser = ({ children }) => {
   const [user, setUser] = useState(existUser);
   const [hover, setHover] = useState(false);
   const [click, setClick] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showRepeatPassword, setShowRepeatPassword] = useState(false);
   const [state, dispatch] = useReducer(reducer, {});
   async function reducer(prev, action) {
     if (action.type === "register") {
@@ -35,7 +37,6 @@ const DateUser = ({ children }) => {
           body: formUser,
         });
         const userData = await addUser.json();
-        console.log("first", userData);
         if (!userData._id) {
           if (!userData.message) {
             const key = Object.entries(userData.keyValue)[0][0];
@@ -121,6 +122,10 @@ const DateUser = ({ children }) => {
         setHover,
         click,
         setClick,
+        showPassword,
+        setShowPassword,
+        showRepeatPassword,
+        setShowRepeatPassword,
       }}
     >
       {children}

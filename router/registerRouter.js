@@ -19,6 +19,7 @@ router.post(
   fotoProfileMiddleWare,
   validRegisterInfo,
   async (req, res, next) => {
+    console.log("first");
     const fotoProfile = req.files["fotoProfile"];
     let newUser;
 

@@ -40,7 +40,17 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    imgProfile: { type: fotoSchema },
+    imgProfile: {
+      type: fotoSchema,
+      default: {
+        fieldname: "avatar",
+        originalname: "avatar",
+        mimetype: "image/png",
+        filename: "default-avatar.png",
+        path: "uploads/avatar.png",
+        size: 0,
+      },
+    },
     verified: {
       type: Boolean,
       default: false,

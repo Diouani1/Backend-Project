@@ -7,15 +7,19 @@ import { UserDate } from "../../DateUser";
 import { useContext } from "react";
 
 const User = () => {
-  const { setError, navigate } = useContext(UserDate);
+  const { setError, navigate, setShowPassword, setShowRepeatPassword } =
+    useContext(UserDate);
 
   function handleLogIn() {
     setError(null);
     navigate("login");
+    setShowPassword(false);
   }
   function handleRegister() {
     setError(null);
     navigate("register");
+    setShowPassword(false);
+    setShowRepeatPassword(false);
   }
   return (
     <div>

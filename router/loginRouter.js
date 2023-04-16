@@ -26,7 +26,6 @@ router.post("/login", validLoginInfo, async (req, res, next) => {
   }
 });
 router.get("/logout", (req, res, next) => {
-  console.log("first");
   res
     .clearCookie("token")
     .send({ message: "you are logout and cookies are deleted" });
